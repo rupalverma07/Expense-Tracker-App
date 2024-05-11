@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import "./expense.css";
 import ExpenseCard from "../ExpenseCard/ExpenseCard";
+import Transactions from "../Recent Transaction/Transactions";
 
 // localStorage.setItem("expences", JSON.stringify(transactionItem));
 localStorage.setItem("balance", JSON.stringify(5000));
@@ -101,7 +102,14 @@ function ExpenseHome() {
           increaseWallet={increaseWalletAmount}
           data={expenses}
         />
-
+ <div className="grid2">
+          <Transactions
+            data={expenses}
+            deleteItem={deleteExpense}
+            editItem={editExpense}
+            addExpense={addExpense}
+          />
+        </div>
       </div>
     </>
   );

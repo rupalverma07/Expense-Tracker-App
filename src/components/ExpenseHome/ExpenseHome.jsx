@@ -4,9 +4,14 @@ import "./expense.css";
 import ExpenseCard from "../ExpenseCard/ExpenseCard";
 import Transactions from "../Recent Transaction/Transactions";
 import ExpenseTrend from "../ExpenseTrend/ExpenseTrend";
+import { useSnackbar } from "notistack";
 
 // localStorage.setItem("expences", JSON.stringify(transactionItem));
-localStorage.setItem("balance", JSON.stringify(5000));
+// localStorage.setItem("balance", JSON.stringify(5000));
+const balance =  localStorage.getItem("balance");
+if(!balance){
+  localStorage.setItem("balance", JSON.stringify(5000));
+}
 function getExpences() {
   const storedExpenses = JSON.parse(localStorage.getItem("expenses"));
   return storedExpenses;
@@ -38,17 +43,25 @@ function ExpenseHome() {
   const [editMode, setEditMode] = useState(false);
   const [editExpenseId, setEditExpenseId] = useState(null);
   const [deleteFlag, setDeleteFlag] = useState(false);
-  const [editFlag, setEditFlag] = useState(false);
-
+  const [increaseFlag, setIncreaseFlag] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
   useEffect(() => {
+    
     localStorage.setItem("expenses", JSON.stringify(expenses));
-  }, [expenses]);
+    localStorage.setItem("balance", JSON.stringify(walletBalance));
+  }, [expenses,increaseFlag]);
 
   const increaseWalletAmount = (amount) => {
     setWalletBalance(walletBalance + Number(amount));
-    localStorage.setItem("balance", JSON.stringify(walletBalance));
+    setIncreaseFlag(true)
   };
   const addExpense = (expense) => {
+    
+    if(expenseAmount > walletBalance){
+      // alert("You have no sufficient balance")
+      enqueueSnackbar("You have no sufficient balance", { variant: "error" });
+      return;
+    }
     if (editMode) {
       const edittedData = expenses.map((elem) => {
         if (elem.id === editExpenseId) {
@@ -79,6 +92,8 @@ function ExpenseHome() {
     setExpenses(updatedExpenses);
     setWalletBalance(walletBalance + deletedExpense.amount);
     setDeleteFlag(true);
+    let deletedAmount = deletedExpense.amount;
+    setExpenseAmount(expenseAmount - deletedAmount);
   };
 
   const editExpense = (id) => {

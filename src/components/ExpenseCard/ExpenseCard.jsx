@@ -35,10 +35,12 @@ function ExpenseCard({ wBalance, expences, addExpense, data, increaseWallet }) {
         />
       </div>
       <div className="col">
-        <h2 className="balance">
-          Expences:
-          <span className="amount">
+        <h2 className="balance" style={{ display: "flex" }}>
+          Expenses:
+          <span className="amount" style={{color:"#FF9304", display: "flex"}}>
+            <div>
             <MdCurrencyRupee />
+            </div>
             {expences}
           </span>
         </h2>

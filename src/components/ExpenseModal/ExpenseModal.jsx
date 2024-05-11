@@ -8,22 +8,33 @@ function ExpenseModel({ title, flag, modelSetter, addExpense, type }) {
   const [amount, setAmount] = useState("");
   const [category, setCategory] = useState("");
   const [date, setDate] = useState("");
-  const [increaseAmount, setIncreaseAmount] = useState(0);
+  const [increaseAmount, setIncreaseAmount] = useState("");
   const dropdownHandler = (e) => {
     setCategory(e.target.value);
   };
   const handleChangeBalance = () => {
     addExpense(increaseAmount);
+    setIncreaseAmount("")
   };
+  const formateDate = (date) =>{
+    console.log(date)
+    const newDate = new Date(date)
+    const dateArr = newDate.toString().split(" ") 
+    console.log(newDate.toString().split(" "))
+    const fomattedDate = `${dateArr[1]} ${dateArr[2]},${dateArr[3]}`
+    return fomattedDate
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    
     if (!title || !amount || !category || !date) return;
     const expense = {
       id: new Date().getTime(),
       title: titleInput,
       amount: parseFloat(amount),
       category,
-      date,
+      date:formateDate(date),
     };
     addExpense(expense);
     setTitleInput("");
@@ -77,7 +88,7 @@ function ExpenseModel({ title, flag, modelSetter, addExpense, type }) {
               Add Balance
             </button>
             <button className="mCancel" onClick={() => modelSetter(false)}>
-              Cencel
+              Cancel
             </button>
           </div>
         </Model>

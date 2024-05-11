@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import "./expense.css";
 import ExpenseCard from "../ExpenseCard/ExpenseCard";
 import Transactions from "../Recent Transaction/Transactions";
+import ExpenseTrend from "../ExpenseTrend/ExpenseTrend";
 
 // localStorage.setItem("expences", JSON.stringify(transactionItem));
 localStorage.setItem("balance", JSON.stringify(5000));
@@ -109,6 +110,7 @@ function ExpenseHome() {
             editItem={editExpense}
             addExpense={addExpense}
           />
+                    <ExpenseTrend data={expenses} />
         </div>
       </div>
     </>

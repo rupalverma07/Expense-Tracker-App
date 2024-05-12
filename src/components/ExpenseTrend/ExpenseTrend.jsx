@@ -68,6 +68,9 @@ function ExpenseTrend({ data }) {
         grid: {
           display: false,
         },
+        ticks: {
+          display: false,
+        },
       },
       y: {
         grid: {

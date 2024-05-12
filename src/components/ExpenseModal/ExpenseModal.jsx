@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Model from "react-modal";
 import "../ExpenseCard/expenseCard.css";
 
-function ExpenseModel({ title, flag, modelSetter, addExpense, type }) {
+function ExpenseModel({ title, flag, modelSetter, addExpense, type, expenseToEdit }) {
   
   const [titleInput, setTitleInput] = useState("");
   const [amount, setAmount] = useState("");
@@ -42,6 +42,14 @@ function ExpenseModel({ title, flag, modelSetter, addExpense, type }) {
     setCategory("");
     setDate("");
   };
+  useEffect(() => {
+    if (expenseToEdit) {
+      setTitleInput(expenseToEdit.title);
+      setAmount(expenseToEdit.amount);
+      setCategory(expenseToEdit.category);
+      setDate(expenseToEdit.date);
+    }
+  }, [expenseToEdit]);
   return (
     <>
       {type === "addAmount" ? (

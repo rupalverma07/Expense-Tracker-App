@@ -19,12 +19,12 @@ function getExpences() {
 function getWalletBalance() {
   const storedExpenses = JSON.parse(localStorage.getItem("expenses"));
   const walletBalance = JSON.parse(localStorage.getItem("balance"));
-  let totalAmount = 0;
-  if (storedExpenses) {
-    storedExpenses.forEach((item) => (totalAmount += item.amount));
-  }
-  let newBalance = walletBalance - totalAmount;
-  return newBalance;
+  // let totalAmount = 0;
+  // if (storedExpenses) {
+  //   storedExpenses.forEach((item) => (totalAmount += item.amount));
+  // }
+  // let newBalance = walletBalance - totalAmount;
+  return walletBalance;
 }
 function getExpenseAmount() {
   const storedExpenses = JSON.parse(localStorage.getItem("expenses"));
@@ -57,7 +57,7 @@ function ExpenseHome() {
   };
   const addExpense = (expense) => {
     
-    if(expenseAmount > walletBalance){
+    if(walletBalance === 0){
       // alert("You have no sufficient balance")
       enqueueSnackbar("You have no sufficient balance", { variant: "error" });
       return;

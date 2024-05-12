@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./transaction.css";
 import leftBtn from "../../assets/Vector 9.png";
 import rightBtn from "../../assets/Vector 9 (1).png";
@@ -23,6 +23,9 @@ function Transactions({ data, deleteItem, editItem, addExpense }) {
     }
   };
   // console.log(TranscList);
+  useEffect(() => {
+    setTotalPages(data.length / 3);
+  }, [data]);
   return (
     <div className="transcGrid">
       <h2>Recent Transactions</h2>
@@ -33,6 +36,7 @@ function Transactions({ data, deleteItem, editItem, addExpense }) {
               deleteItem={deleteItem}
               editItem={editItem}
               addExpense={addExpense}
+              allData={data}
             />
           ))):(<div className="summary"><p className="noData" style={{color:"#000"}}>No Data Available</p></div>)}
         <div className="pagination">

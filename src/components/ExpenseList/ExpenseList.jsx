@@ -9,8 +9,8 @@ import { MdCurrencyRupee, MdHeight } from "react-icons/md";
 import ExpenseModel from "../ExpenseModal/ExpenseModal";
 
 
-function ExpenseList({ data, deleteItem, editItem, addExpense }) {
-  const [titleIcon, setTitleIcon] = useState(null);
+function ExpenseList({ data, deleteItem, editItem, addExpense ,allData}) {
+  const [editExpense, setEditExpense] = useState({});
   const [addModalIsOpen, setAddModalIsOpen] = useState(false);
   const deleteHandler = (id) => {
     deleteItem(id);
@@ -18,6 +18,9 @@ function ExpenseList({ data, deleteItem, editItem, addExpense }) {
   const editHandler = (id) => {
     editItem(id);
     setAddModalIsOpen(true);
+    const editedExpense = allData.find((expense) => expense.id === id);
+    setEditExpense(editedExpense);
+   
   };
   return (
     <div className="listContainer">
@@ -64,6 +67,7 @@ function ExpenseList({ data, deleteItem, editItem, addExpense }) {
         modelSetter={setAddModalIsOpen}
         type="addExpense"
         addExpense={addExpense}
+        expenseToEdit={editExpense}
       />
     </div>
   );

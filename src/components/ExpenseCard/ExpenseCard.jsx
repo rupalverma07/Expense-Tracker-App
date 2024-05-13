@@ -63,7 +63,7 @@ function ExpenseCard({ wBalance, expences, addExpense, data, increaseWallet }) {
           type="addExpense"
         />
       </div>
-      <div  style={{ width: "30%", height: "200px" }}>
+      <div  className="chartContent">
         {data.length > 0 ? (<ExpenseSummary data={data} />):(
         <div className="summary"><p className="noData">No Data Available</p></div>)}
         {/* <PieChartComp data={data} /> */}

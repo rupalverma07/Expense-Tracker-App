@@ -16,6 +16,22 @@ function ExpenseModel({ title, flag, modelSetter, addExpense, type, expenseToEdi
     addExpense(increaseAmount);
     setIncreaseAmount("")
   };
+  const customStyles = {
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      // backgroundColor: "rgba(255, 255, 255, 0.75)",
+      borderRadius: "15px",
+      outline: "none",
+      padding: "32px",
+      // height:"40%",
+      background: "#EFEFEFD9",
+    },
+  };
   const formateDate = (date) =>{
     console.log(date)
     const newDate = new Date(date)
@@ -55,33 +71,7 @@ function ExpenseModel({ title, flag, modelSetter, addExpense, type, expenseToEdi
       {type === "addAmount" ? (
         <Model
           isOpen={flag}
-          style={{
-            overlay: {
-              position: "fixed",
-              right: 0,
-              bottom: 0,
-              backgroundColor: "rgba(255, 255, 255, 0.75)",
-              width: "570px",
-              height: "184px",
-              top: "196px",
-              left: "371px",
-              borderRadius: "15px",
-            },
-            content: {
-              position: "absolute",
-              top: "0px",
-              left: "0px",
-              right: "0px",
-              bottom: "0px",
-              border: "1px solid #ccc",
-              background: "#EFEFEFD9",
-              overflow: "auto",
-              WebkitOverflowScrolling: "touch",
-              borderRadius: "15px",
-              outline: "none",
-              padding: "20px",
-            },
-          }}
+          style={customStyles}
         >
           <h2 className="mTitle">{title}</h2>
           <div className="">
@@ -90,7 +80,7 @@ function ExpenseModel({ title, flag, modelSetter, addExpense, type, expenseToEdi
               value={increaseAmount}
               onChange={(e) => setIncreaseAmount(e.target.value)}
               placeholder="Income Amount"
-              className="mInput"
+              className="amountInput"
             />
             <button className="mAdd" onClick={handleChangeBalance}>
               Add Balance
@@ -103,33 +93,7 @@ function ExpenseModel({ title, flag, modelSetter, addExpense, type, expenseToEdi
       ) : (
         <Model
           isOpen={flag}
-          style={{
-            overlay: {
-              position: "fixed",
-              right: 0,
-              bottom: 0,
-              backgroundColor: "rgba(255, 255, 255, 0.75)",
-              width: "570px",
-              height: "350px",
-              top: "106px",
-              left: "371px",
-              borderRadius: "15px",
-            },
-            content: {
-              position: "absolute",
-              top: "0px",
-              left: "0px",
-              right: "0px",
-              bottom: "0px",
-              border: "1px solid #ccc",
-              background: "#EFEFEFD9",
-              overflow: "auto",
-              WebkitOverflowScrolling: "touch",
-              borderRadius: "15px",
-              outline: "none",
-              padding: "20px",
-            },
-          }}
+          style={customStyles}
         >
           <h2 className="mTitle">{title}</h2>
           <form onSubmit={handleSubmit}>
